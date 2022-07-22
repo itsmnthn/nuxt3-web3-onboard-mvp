@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "devDependencies": {
+    "@pinia/nuxt": "^0.3.0",
+    "nuxt": "3.0.0-rc.6"
+  },
+  "dependencies": {
+    "@web3-onboard/core": "^2.5.0",
+    "@web3-onboard/injected-wallets": "^2.0.14",
+    "ethers": "^5.6.9",
+    "pinia": "^2.0.16"
+  }
+}
