@@ -1,4 +1,14 @@
 {
+  "name": "@itsmnthn/nuxt3-web3-onboard-mvp",
+  "version": "1.0.0",
+  "keywords": ["nuxt3", "web3-onboard"],
+  "license": "MIT",
+  "author": "Manthankumar Satani<mnthnup@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itsmnthn/nuxt3-web3-onboard-mvp",
+    "directory": "./"
+  },
   "private": true,
   "scripts": {
     "build": "nuxt build",
@@ -15,5 +25,8 @@
     "@web3-onboard/injected-wallets": "^2.0.14",
     "ethers": "^5.6.9",
     "pinia": "^2.0.16"
+  },
+  "engines": {
+    "node": "^16.11.0 || ^17.0.0"
   }
 }
