@@ -1,7 +1,10 @@
 {
   "name": "@itsmnthn/nuxt3-web3-onboard-mvp",
   "version": "1.0.0",
-  "keywords": ["nuxt3", "web3-onboard"],
+  "keywords": [
+    "nuxt3",
+    "web3-onboard"
+  ],
   "license": "MIT",
   "author": "Manthankumar Satani<mnthnup@gmail.com>",
   "repository": {
@@ -18,11 +21,13 @@
   },
   "devDependencies": {
     "@pinia/nuxt": "^0.3.0",
-    "nuxt": "3.0.0-rc.6"
+    "nuxt": "3.0.0-rc.6",
+    "rollup-plugin-polyfill-node": "^0.10.2"
   },
   "dependencies": {
     "@web3-onboard/core": "^2.5.0",
     "@web3-onboard/injected-wallets": "^2.0.14",
+    "@web3-onboard/walletconnect": "^2.0.7",
     "ethers": "^5.6.9",
     "pinia": "^2.0.16"
   },

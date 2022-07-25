@@ -135,12 +135,29 @@ export const getOnboard = async (chains: Chain[]): Promise<OnboardAPI> => {
   const injectedModule = (await import('@web3-onboard/injected-wallets'))
     .default;
   const Onboard = (await import('@web3-onboard/core')).default;
+  const walletConnectModule = (await import('@web3-onboard/walletconnect'))
+    .default;
+
+  const walletConnect = walletConnectModule({
+    // bridge: 'YOUR_CUSTOM_BRIDGE_SERVER', // default = 'https://bridge.walletconnect.org'
+    // qrcodeModalOptions: {
+    //   mobileLinks: [
+    //     'rainbow',
+    //     'metamask',
+    //     'argent',
+    //     'trust',
+    //     'imtoken',
+    //     'pillar',
+    //   ],
+    // },
+  });
 
   const injected = injectedModule({
     filter: {} /* mapping of wallet label to filter here */,
   });
+
   const onboard = Onboard({
-    wallets: [injected],
+    wallets: [injected, walletConnect],
     chains: chains,
     appMetadata: {
       name: 'Nuxt3 - web3-onboard',
