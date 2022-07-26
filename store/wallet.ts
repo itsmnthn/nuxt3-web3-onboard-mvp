@@ -1,4 +1,5 @@
-import type { Chain } from '@web3-onboard/common/dist/types';
+import type { Chain } from '@web3-onboard/common/dist/types.js';
+import { createEIP1193Provider } from '@web3-onboard/common';
 import type { Signer } from '@ethersproject/abstract-signer';
 import {
   JsonRpcProvider,
@@ -10,7 +11,8 @@ import type {
   ConnectOptionsString,
   OnboardAPI,
   WalletState,
-} from '@web3-onboard/core/dist/types';
+} from '@web3-onboard/core/dist/types.js';
+import { InjectedNameSpace } from '@web3-onboard/injected-wallets/dist/types.js';
 import type { EIP1193Provider } from '@web3-onboard/core';
 import { defineStore, storeToRefs } from 'pinia';
 import { watch } from 'vue';
@@ -154,6 +156,28 @@ export const getOnboard = async (chains: Chain[]): Promise<OnboardAPI> => {
 
   const injected = injectedModule({
     filter: {} /* mapping of wallet label to filter here */,
+    custom: [
+      {
+        label: 'Core', // The label that will be displayed in the wallet selection modal
+        injectedNamespace: InjectedNameSpace.Ethereum, // The property on the window where the injected provider is defined // Example: window.ethereum
+        // A function that returns a bool indicating whether or not the provider is
+        // of a certain identity. In this case, a unique property on the provider
+        // is used to identify the provider.
+        // In most cases this is in the format: `is<provider-name>`.
+        // You may also include custom logic here if checking for the property
+        // isn't sufficient.
+        checkProviderIdentity: ({ provider }) =>
+          !!provider && !!provider['isAvalanche'],
+        // A method that returns a string of the wallet icon which will be displayed
+        getIcon: async () => (await import('/core.svg')).default,
+        // Returns a valid EIP1193 provider. In some cases the provider will need to be patched to satisfy the EIP1193 Provider interface
+        // getInterface: () => ({ provider: window.ethereum }),
+        getInterface: async () => ({
+          provider: createEIP1193Provider(window.avalanche),
+        }),
+        platforms: ['desktop'], // A list of platforms that this wallet supports
+      },
+    ],
   });
 
   const onboard = Onboard({
