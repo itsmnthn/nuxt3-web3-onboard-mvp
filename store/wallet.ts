@@ -1,5 +1,4 @@
-import type { Chain } from '@web3-onboard/common/dist/types.js';
-import { createEIP1193Provider } from '@web3-onboard/common';
+import type { Chain } from '@web3-onboard/common/dist/types';
 import type { Signer } from '@ethersproject/abstract-signer';
 import {
   JsonRpcProvider,
@@ -11,8 +10,8 @@ import type {
   ConnectOptionsString,
   OnboardAPI,
   WalletState,
-} from '@web3-onboard/core/dist/types.js';
-import { InjectedNameSpace } from '@web3-onboard/injected-wallets/dist/types.js';
+} from '@web3-onboard/core/dist/types';
+import { InjectedNameSpace } from '@web3-onboard/injected-wallets/dist/types';
 import type { EIP1193Provider } from '@web3-onboard/core';
 import { defineStore, storeToRefs } from 'pinia';
 import { watch } from 'vue';
@@ -139,6 +138,7 @@ export const getOnboard = async (chains: Chain[]): Promise<OnboardAPI> => {
   const Onboard = (await import('@web3-onboard/core')).default;
   const walletConnectModule = (await import('@web3-onboard/walletconnect'))
     .default;
+  const { createEIP1193Provider } = await import('@web3-onboard/common');
 
   const walletConnect = walletConnectModule({
     // bridge: 'YOUR_CUSTOM_BRIDGE_SERVER', // default = 'https://bridge.walletconnect.org'
