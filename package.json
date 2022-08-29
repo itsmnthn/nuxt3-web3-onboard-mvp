@@ -20,16 +20,16 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
-    "@pinia/nuxt": "^0.3.0",
-    "nuxt": "3.0.0-rc.6",
+    "@pinia/nuxt": "^0.4.1",
+    "nuxt": "^3.0.0-rc.8",
     "rollup-plugin-polyfill-node": "^0.10.2"
   },
   "dependencies": {
-    "@web3-onboard/core": "^2.5.0",
-    "@web3-onboard/injected-wallets": "^2.0.14",
-    "@web3-onboard/walletconnect": "^2.0.7",
-    "ethers": "^5.6.9",
-    "pinia": "^2.0.16"
+    "@web3-onboard/core": "^2.8.1",
+    "@web3-onboard/injected-wallets": "^2.2.0",
+    "@web3-onboard/walletconnect": "^2.1.1",
+    "ethers": "^5.7.0",
+    "pinia": "^2.0.21"
   },
   "engines": {
     "node": "^16.11.0 || ^17.0.0"
