@@ -1,51 +1,46 @@
 import { defineNuxtConfig } from 'nuxt';
-import nodePolyfills from 'rollup-plugin-polyfill-node';
-
-const MODE = process.env.NODE_ENV;
-
-// ↓ Have to check the mode here because this cant run on build
-const vitePlugin =
-  MODE === 'development'
-    ? [
-        nodePolyfills({
-          include: [
-            'node_modules/**/*.js',
-            new RegExp('node_modules/.vite/.*js'),
-          ],
-        }),
-      ]
-    : [];
+// yarn add --dev @esbuild-plugins/node-globals-polyfill
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
+// yarn add --dev @esbuild-plugins/node-modules-polyfill
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
+// You don't need to add this to deps, it's included by @esbuild-plugins/node-modules-polyfill
+import rollupNodePolyFill from 'rollup-plugin-node-polyfills';
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   buildModules: ['@pinia/nuxt'],
-  build: {
-    transpile: ['@ethersproject', 'ethers'],
-  },
   vite: {
-    plugins: [...vitePlugin],
-    build: {
-      rollupOptions: {
-        plugins: [
-          // ↓ Needed for build
-          nodePolyfills(),
-        ],
-      },
-      // ↓ Needed for build
-      commonjsOptions: {
-        transformMixedEsModules: true,
-      },
-    },
     optimizeDeps: {
       include: [
-        'vue',
         'bn.js',
         'js-sha3',
         'hash.js',
         'aes-js',
         'scrypt-js',
         'bech32',
+        '@web3-onboard/walletconnect',
       ],
+      esbuildOptions: {
+        // Enable esbuild polyfill plugins
+        plugins: [
+          NodeGlobalsPolyfillPlugin({
+            process: true,
+            buffer: true,
+          }),
+          NodeModulesPolyfillPlugin(),
+        ],
+      },
+    },
+    build: {
+      rollupOptions: {
+        plugins: [
+          // Enable rollup polyfills plugin
+          // used during production bundling
+          rollupNodePolyFill(),
+        ],
+      },
     },
   },
+
+  build: { transpile: ['@ethersproject', 'ethers'] },
 });

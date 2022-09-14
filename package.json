@@ -20,12 +20,13 @@
     "preview": "nuxt preview"
   },
   "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
+    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@pinia/nuxt": "^0.4.1",
-    "nuxt": "^3.0.0-rc.8",
-    "rollup-plugin-polyfill-node": "^0.10.2"
+    "nuxt": "^3.0.0-rc.8"
   },
   "dependencies": {
-    "@web3-onboard/core": "^2.8.1",
+    "@web3-onboard/core": "^2.8.3",
     "@web3-onboard/injected-wallets": "^2.2.0",
     "@web3-onboard/walletconnect": "^2.1.1",
     "ethers": "^5.7.0",
